@@ -9,7 +9,7 @@ Console.WriteLine("Ange andra talet:");
 double num2 = Convert.ToDouble(Console.ReadLine());
 
 double result;
-//test aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+//test aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 switch (operation)
 {
     case '+':
@@ -28,6 +28,6 @@ switch (operation)
         Console.WriteLine("Fel: Ogiltig operation.");
         return;
 }
-//hhhh
+//hhhhaaaa
 Console.WriteLine($"Resultat: {result}");
 Console.ReadKey();
