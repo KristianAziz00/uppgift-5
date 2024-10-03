@@ -11,10 +11,23 @@ class Program
 
         while (keepGoing)
         {
-            // Ber användaren att välja en operation
-            Console.WriteLine("Välj en operation (+, -, *, /, r för kvadratrot):");
-            char operation = Console.ReadKey().KeyChar;
-            Console.WriteLine();
+            // Ber användaren att välja en operation med validering
+            char operation;
+            while (true)
+            {
+                Console.WriteLine("Välj en operation (+, -, *, /, r för kvadratrot):");
+                operation = Console.ReadKey().KeyChar;
+                Console.WriteLine();
+
+                if (operation == '+' || operation == '-' || operation == '*' || operation == '/' || operation == 'r')
+                {
+                    break; // Giltig operation, bryt loopen
+                }
+                else
+                {
+                    Console.WriteLine("Fel: Ogiltig operation. Försök igen.");
+                }
+            }
 
             double num1 = 0;
             double num2 = 0; // Skapa variabel för num2, även om den kanske inte används
