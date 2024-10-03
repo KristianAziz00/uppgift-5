@@ -14,23 +14,23 @@ double num1 = Convert.ToDouble(Console.ReadLine());
 Console.WriteLine("Ange andra talet:");
 double num2 = Convert.ToDouble(Console.ReadLine());  // Läser in andra talet och konverterar det till en double
 
-double result; // Deklarerar en variabel för att lagra resultatet
 
 
+double result = 0;
 // Switch-sats som kollar vilken operation användaren har valt
 switch (operation)
 {
     case '+':
-        result = num1 + num2; // Om användaren valde '+', addera de två talen
+        Console.WriteLine($"result: {num1 + num2}");  // Om användaren valde '+', addera de två talen
         break;
     case '-':
-        result = num1 - num2; // Om användaren valde '-', subtrahera andra talet från första
+        Console.WriteLine($"result: {num1 + num2}"); // Om användaren valde '-', subtrahera andra talet från första
         break;
     case '*':
-        result = num1 * num2; // Om användaren valde '*', multiplicera de två talen
+        Console.WriteLine($"result: {num1 + num2}"); // Om användaren valde '*', multiplicera de två talen
         break;
     case '/':
-        result = num1 / num2; // Om användaren valde '/', dividera första talet med andra
+        Console.WriteLine($"result: {num1 + num2}"); // Om användaren valde '/', dividera första talet med andra
         break;
     default:
         // Om inget av ovanstående tecken valdes, skrivs ett felmeddelande ut
@@ -41,4 +41,4 @@ switch (operation)
 Console.WriteLine($"Resultat: {result}");
 
 // Väntar på att användaren ska trycka på en tangent innan programmet stängs
-Console.ReadKey();
+Console.ReadKey(); 
