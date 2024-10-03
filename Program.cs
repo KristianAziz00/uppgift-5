@@ -1,51 +1,101 @@
-﻿// Skriver ut rubriken för kalkylatorn
-Console.WriteLine("Kalkylator");
+﻿using System;
 
-// Ber användaren att välja en operation och väntar på inmatning av ett tecken (+, -, *, /)
-Console.WriteLine("Välj en operation (+, -, *, /):");
-char operation = Console.ReadKey().KeyChar;
-
-// Hoppar till en ny rad och ber om det första talet
-Console.WriteLine("\nAnge första talet:");
-double num1 = Convert.ToDouble(Console.ReadLine());  // Läser in första talet
-
-// Ber om det andra talet
-Console.WriteLine("Ange andra talet:");
-double num2 = Convert.ToDouble(Console.ReadLine());  // Läser in andra talet
-
-double result = 0;  // Deklarerar variabeln som ska lagra resultatet
-
-// Switch-sats som kollar vilken operation användaren har valt
-switch (operation)
+class Program
 {
-    case '+':
-        result = num1 + num2;  // Om användaren valde '+', addera de två talen
-        break;
-    case '-':
-        result = num1 - num2;  // Om användaren valde '-', subtrahera andra talet från första
-        break;
-    case '*':
-        result = num1 * num2;  // Om användaren valde '*', multiplicera de två talen
-        break;
-    case '/':
-        if (num2 != 0)
+    static void Main()
+    {
+        Console.WriteLine("Kalkylator");
+
+        bool keepGoing = true;
+
+        while (keepGoing)
         {
-            result = num1 / num2;  // Om användaren valde '/', dividera första talet med andra
+            // Ber användaren att välja en operation
+            Console.WriteLine("Välj en operation (+, -, *, /):");
+            char operation = Console.ReadKey().KeyChar;
+            Console.WriteLine();
+
+            // Ber om det första talet
+            Console.WriteLine("Ange första talet:");
+            double num1;
+            while (!double.TryParse(Console.ReadLine(), out num1))
+            {
+                Console.WriteLine("Ogiltig inmatning. Försök igen:");
+            }
+
+            // Ber om det andra talet
+            Console.WriteLine("Ange andra talet:");
+            double num2;
+            while (!double.TryParse(Console.ReadLine(), out num2))
+            {
+                Console.WriteLine("Ogiltig inmatning. Försök igen:");
+            }
+
+            double result = 0;
+
+            // Switch-sats för operation
+            switch (operation)
+            {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    if (num2 != 0)
+                    {
+                        result = num1 / num2;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Fel: Division med noll är inte tillåten.");
+                        continue;  // Återgå till början av loopen
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Fel: Ogiltig operation.");
+                    continue;  // Återgå till början av loopen
+            }
+
+            // Skriver ut resultatet
+            Console.WriteLine($"Resultat: {result}");
+
+            // Skapa en array för att lagra resultaten
+            double[] resultsArray = new double[10]; // Skapa en array för upp till 10 resultat
+            resultsArray[0] = result; // Spara resultatet på första indexet
+
+            // Fråga användaren vilket resultat de vill se
+            Console.WriteLine("Vilket resultat vill du se? (0-9, 0 för senaste resultatet)");
+            int indexToAccess;
+            while (!int.TryParse(Console.ReadLine(), out indexToAccess) || indexToAccess < 0 || indexToAccess >= resultsArray.Length)
+            {
+                Console.WriteLine("Fel: Ogiltigt index. Försök igen med ett index mellan 0 och 9.");
+            }
+
+            try
+            {
+                // Försök att skriva ut det valda resultatet
+                Console.WriteLine($"Resultatet vid index {indexToAccess} är: {resultsArray[indexToAccess]}");
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                Console.WriteLine($"Fel: {e.Message}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Något gick fel: " + e.Message);
+            }
+
+            // Fråga om ny beräkning
+            Console.WriteLine("Vill du göra en ny beräkning? (j/n)");
+            char response = Console.ReadKey().KeyChar;
+            keepGoing = response == 'j' || response == 'J';
+            Console.WriteLine();  // För att gå till ny rad
         }
-        else
-        {
-            Console.WriteLine("Fel: Division med noll är inte tillåten.");
-            return;  // Avbryt om det sker division med noll
-        }
-        break;
-    default:
-        // Om inget av ovanstående tecken valdes, skrivs ett felmeddelande ut
-        Console.WriteLine("Fel: Ogiltig operation.");
-        return;  // Avbryter programmet om en ogiltig operation har valts
+    }
 }
 
-// Skriver ut resultatet av beräkningen
-Console.WriteLine($"Resultat: {result}");
-
-// Väntar på att användaren ska trycka på en tangent innan programmet stängs
-Console.ReadKey();
